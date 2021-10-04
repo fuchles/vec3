@@ -67,3 +67,8 @@
 		local px, py, pz = getElementPosition(element)
 		return {x = px, y = py, z = pz}
 	end
+	
+	function vec3.getRot(element)
+		local px, py, pz = getElementRotation(element)
+		return {x = px, y = py, z = pz}
+	end
