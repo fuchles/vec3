@@ -38,7 +38,9 @@
 	
 	function vec3.dirToAngle(vec)
 		local angle = math.atan2(vec.x, vec.y)
-		return {x = vec.z * 90, y = 0, z = 180*angle/math.pi}
+		local x = math.deg(math.atan2(vec.z, vec3.getDistance({x=vec.x,y=vec.y,z=0}, {x=0,y=0,z=0})))
+		local z = -math.deg(angle)--180*angle/math.pi
+		return {x = x, y = 0, z = z}
 	end
 	
 	function vec3.crossVec(vec1, vec2)
