@@ -75,6 +75,24 @@ function vec3.getRot(element)
     return {x = px, y = py, z = pz}
 end
 
+function vec3.getBezierCurvePos(progress, ...)
+    local args = {...}
+
+    local dir1 = vec3.getDirFromTo(args[1], args[2])
+    local len1 = vec3.getDistance(args[2], args[1])
+    local pos1 = vec3.addVec(args[1], vec3.scaleVec(dir1, len1 * progress))
+
+    local dir2 = vec3.getDirFromTo(args[2], args[3])
+    local len2 = vec3.getDistance(args[3], args[2])
+    local pos2 = vec3.addVec(args[2], vec3.scaleVec(dir2, len2 * progress))
+
+    local dir3 = vec3.getDirFromTo(pos1, pos2)
+    local len3 = vec3.getDistance(pos2, pos1)
+    local pos3 = vec3.addVec(pos1, vec3.scaleVec(dir3, len3 * progress))
+
+    return pos3
+end
+
 function vec3.planeRayIntersect(pos, normal, rayPos, rayDir)
     local d0 = -(normal.x*pos.x + normal.y*pos.y + normal.z*pos.z)
 
